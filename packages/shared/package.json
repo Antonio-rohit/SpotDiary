@@ -1,0 +1,19 @@
+{
+  "name": "@spotdiary/shared",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "npx tsc && node --test dist/search/memorySearch.test.js"
+  },
+  "dependencies": {
+    "spotdiary-monorepo": "file:../..",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

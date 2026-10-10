@@ -1,0 +1,19 @@
+{
+  "name": "spotdiary-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:mobile": "npm --prefix apps/mobile run start",
+    "build:shared": "npm --prefix packages/shared run build",
+    "build:web": "npm --prefix apps/web run build",
+    "test": "npm --prefix packages/shared run test && npm --prefix apps/web run test",
+    "lint": "npm --prefix apps/web run lint"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

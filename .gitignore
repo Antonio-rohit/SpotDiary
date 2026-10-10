@@ -1,0 +1,87 @@
+# =============================================================
+# SpotDiary Monorepo Git Ignore Rules
+# =============================================================
+
+# Dependencies
+node_modules/
+**/node_modules/
+.pnpm-store/
+.yarn/
+
+# Build Outputs & Caches
+.next/
+**/.next/
+dist/
+**/dist/
+out/
+**/out/
+build/
+**/build/
+*.tsbuildinfo
+**/*.tsbuildinfo
+.turbo/
+**/.turbo/
+
+# Local Databases & Temporary Application Data
+.data/
+**/.data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Locally Uploaded Photos & User Media
+public/uploads/
+**/public/uploads/
+uploads/
+**/uploads/
+
+# Environment Files (Real Credentials)
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Preserve Example Template Files
+!.env.example
+!**/.env.example
+!.env.*.example
+!**/.env.*.example
+
+# Logs & Debugging Output
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/scratch/
+
+# Editor & OS Artifacts
+.DS_Store
+Thumbs.db
+.idea/
+**/.idea/
+.vscode/
+**/.vscode/
+*.swp
+*.swo
+
+# Security & Credentials
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Expo & Mobile Build Outputs
+.expo/
+**/.expo/
+*.web.js
+android/
+ios/

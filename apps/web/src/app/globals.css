@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #F8F5EE;
+  --bg-surface: #FFFFFF;
+  --brand-teal: #254542;
+  --brand-teal-dark: #1C3533;
+  --brand-sage: #AAB69A;
+  --text-dark: #273C3A;
+  --text-muted: #89928D;
+  --border-subtle: #E8E7DF;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F5EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4C9C4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #254542;
+}
+
+/* Glassmorphic soft overlay */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 231, 223, 0.8);
+}
+
+/* Soft transition effects */
+.transition-smooth {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Category Filter Pill Active/Inactive styles */
+.pill-active {
+  background-color: #254542;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(37, 69, 66, 0.25);
+}
+
+.pill-inactive {
+  background-color: #FFFFFF;
+  color: #273C3A;
+  border: 1px solid #E8E7DF;
+}
+
+.pill-inactive:hover {
+  background-color: #F1ECE1;
+}
+
+/* Mobile Bottom Navigation Bar fixed */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 50;
+  }
+}
