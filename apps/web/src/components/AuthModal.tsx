@@ -57,9 +57,24 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     let res: { success: boolean; error?: string };
 
     if (mode === 'signup') {
-      res = await register(email, password, displayName);
+      const trimmedEmail = email.trim();
+      const trimmedName = displayName.trim();
+
+      if (password.length < 8) {
+        setMessage({ type: 'error', text: 'Password must be at least 8 characters long.' });
+        setLoading(false);
+        return;
+      }
+
+      if (trimmedName.length > 0 && trimmedName.length < 2) {
+        setMessage({ type: 'error', text: 'Display name must be at least 2 characters.' });
+        setLoading(false);
+        return;
+      }
+
+      res = await register(trimmedEmail, password, trimmedName);
     } else {
-      res = await login(email, password);
+      res = await login(email.trim(), password);
     }
 
     setLoading(false);
@@ -122,8 +137,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </label>
               <input
                 type="text"
-                required
-                placeholder="Rohit Sharma"
+                placeholder="Rohit Sharma (optional)"
                 value={displayName}
                 onChange={e => setDisplayName(e.target.value)}
                 className="w-full bg-[#F8F5EE] border border-[#E8E7DF] rounded-2xl px-4 py-3 text-xs font-medium text-[#273C3A] focus:outline-none focus:ring-2 focus:ring-[#254542]"
@@ -169,7 +183,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <input
                 type="password"
                 required
-                placeholder="••••••••"
+                minLength={mode === 'signup' ? 8 : 1}
+                placeholder={mode === 'signup' ? 'Minimum 8 characters' : '••••••••'}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 className="w-full bg-[#F8F5EE] border border-[#E8E7DF] rounded-2xl px-4 py-3 text-xs font-medium text-[#273C3A] focus:outline-none focus:ring-2 focus:ring-[#254542]"

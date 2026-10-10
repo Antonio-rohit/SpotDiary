@@ -82,7 +82,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const data = await res.json();
       if (!res.ok || data.error) {
-        return { success: false, error: data.error || 'Registration failed.' };
+        let errorMsg = data.error || 'Registration failed.';
+        if (data.details && typeof data.details === 'object') {
+          const detailMsgs = Object.values(data.details).flat().filter(Boolean);
+          if (detailMsgs.length > 0) {
+            errorMsg = detailMsgs.join('. ');
+          }
+        }
+        return { success: false, error: errorMsg };
       }
 
       setUser(data.user);

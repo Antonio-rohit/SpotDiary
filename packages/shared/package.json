@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "npx tsc",
-    "test": "npx tsc && node --test dist/search/memorySearch.test.js"
+    "test": "npx tsc && node --test dist/search/memorySearch.test.js dist/schemas/register.test.js"
   },
   "dependencies": {
     "spotdiary-monorepo": "file:../..",

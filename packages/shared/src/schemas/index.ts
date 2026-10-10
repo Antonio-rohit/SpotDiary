@@ -22,11 +22,46 @@ export const PeopleContextEnum = z.enum([
 
 export const VisibilityEnum = z.enum(['public', 'private']);
 
-export const RegisterSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters long'),
-  displayName: z.string().min(2, 'Display name must be at least 2 characters').optional()
-});
+export const RegisterSchema = z
+  .object({
+    email: z
+      .string({ required_error: 'Email is required' })
+      .trim()
+      .email('Please enter a valid email address'),
+    password: z
+      .string({ required_error: 'Password is required' })
+      .min(8, 'Password must be at least 8 characters long'),
+    displayName: z
+      .string()
+      .trim()
+      .refine((val) => val === '' || val.length >= 2, {
+        message: 'Display name must be at least 2 characters',
+      })
+      .optional(),
+    name: z
+      .string()
+      .trim()
+      .refine((val) => val === '' || val.length >= 2, {
+        message: 'Name must be at least 2 characters',
+      })
+      .optional(),
+    display_name: z
+      .string()
+      .trim()
+      .refine((val) => val === '' || val.length >= 2, {
+        message: 'Display name must be at least 2 characters',
+      })
+      .optional(),
+  })
+  .transform((data) => {
+    const rawName = data.displayName || data.name || data.display_name;
+    const trimmedName = rawName ? rawName.trim() : undefined;
+    return {
+      email: data.email.toLowerCase().trim(),
+      password: data.password,
+      displayName: trimmedName && trimmedName.length >= 2 ? trimmedName : undefined,
+    };
+  });
 
 export const LoginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),

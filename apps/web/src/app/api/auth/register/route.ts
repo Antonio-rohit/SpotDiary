@@ -9,8 +9,12 @@ export async function POST(request: Request) {
     const parseResult = RegisterSchema.safeParse(body);
 
     if (!parseResult.success) {
+      const fieldErrors = parseResult.error.flatten().fieldErrors;
+      const errorList = Object.values(fieldErrors).flat().filter(Boolean);
+      const actionMessage = errorList.length > 0 ? errorList.join('. ') : 'Registration validation failed.';
+
       return NextResponse.json(
-        { error: 'Registration validation failed.', details: parseResult.error.flatten().fieldErrors },
+        { error: actionMessage, details: fieldErrors },
         { status: 400 }
       );
     }
